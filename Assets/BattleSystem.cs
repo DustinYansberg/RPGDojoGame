@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
@@ -12,31 +13,32 @@ public class BattleSystem : MonoBehaviour
     Unit PlayerUnit;
     Unit EnemyUnit;
 
+    public HealthBar PlayerHealthBar;
+    public HealthBar EnemyHealthBar;
+
     public BattleState State;
     void Start()
     {
         State = BattleState.START;
         StartCoroutine(SetupBattle());
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (State != BattleState.PLAYERTURN)
-            {
-                return;
-            }
-            StartCoroutine(PlayerAttack());
-        }
-    }
+
 
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(playerPrefab, new Vector3(-5, -1, 0), Quaternion.identity);
         PlayerUnit = playerGO.GetComponent<Unit>();
+        PlayerHealthBar = playerGO.GetComponentInChildren<HealthBar>();
+        PlayerUnit.healthBar = PlayerHealthBar;
+
 
         GameObject enemyGO = Instantiate(enemyPrefab, new Vector3(5, -1, 0), Quaternion.identity);
         EnemyUnit = enemyGO.GetComponent<Unit>();
+        EnemyHealthBar = enemyGO.GetComponentInChildren<HealthBar>();
+        EnemyUnit.healthBar = EnemyHealthBar;
+
+        PlayerHealthBar.SetMaxHealth(PlayerUnit);
+        EnemyHealthBar.SetMaxHealth(EnemyUnit);
 
         Debug.Log("BattleSystem: SetupBattle - " + PlayerUnit.UnitName + " vs " + EnemyUnit.UnitName);
 
@@ -79,7 +81,7 @@ public class BattleSystem : MonoBehaviour
     {
         bool isDead = EnemyUnit.TakeDamage(PlayerUnit.Damage);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         if (isDead)
         {
@@ -102,6 +104,19 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttack());
 
     }
+
+    public void OnHealButton()
+    {
+        if (State != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+        PlayerUnit.CurrentHP += 10;
+        PlayerHealthBar.SetHealth(PlayerUnit.CurrentHP);
+        State = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
 
     void EndBattle()
     {

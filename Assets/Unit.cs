@@ -10,9 +10,12 @@ public class Unit : MonoBehaviour
     public int MaxHP;
     public int CurrentHP;
 
+    public HealthBar healthBar;
+
     public bool TakeDamage(int damageAmount)
     {
         CurrentHP -= damageAmount;
+        healthBar.SetHealth(CurrentHP);
 
         if (CurrentHP <= 0)
         {
