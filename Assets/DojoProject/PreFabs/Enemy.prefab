@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1389875971817951634}
   - component: {fileID: 4128382203187785720}
   - component: {fileID: 4845855126496781732}
+  - component: {fileID: 6853450088517003425}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -75,9 +76,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1159768795, guid: 84e4be79c4db38d48b964862477a0249, type: 3}
+  m_Sprite: {fileID: -1845064986, guid: 345b12162980c7d459f64a1c0113169c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.32}
@@ -101,9 +102,30 @@ MonoBehaviour:
   UnitName: Enemy
   UnitLevel: 1
   Damage: 10
-  MaxHP: 30
-  CurrentHP: 30
+  MaxHP: 70
+  CurrentHP: 70
   healthBar: {fileID: 0}
+--- !u!95 &6853450088517003425
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902381900199949585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0527c1ec13e1411459ffdb2554f80ee6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2321037556196073613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +153,14 @@ PrefabInstance:
     - target: {fileID: 935786007954142244, guid: ee92a37a309a69c4099f11c4ce27574f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464542287704472493, guid: ee92a37a309a69c4099f11c4ce27574f, type: 3}
+      propertyPath: m_Value
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464542287704472493, guid: ee92a37a309a69c4099f11c4ce27574f, type: 3}
+      propertyPath: m_MaxValue
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4831265059339657735, guid: ee92a37a309a69c4099f11c4ce27574f, type: 3}
       propertyPath: m_AnchorMax.x
